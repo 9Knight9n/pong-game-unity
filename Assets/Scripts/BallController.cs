@@ -45,9 +45,25 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Wall.ToString()) || other.gameObject.CompareTag(Tags.Paddle.ToString()))
         {
+            if (other.gameObject.CompareTag(Tags.Paddle.ToString()))
+            {
+                other.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            }
             var speed = _lastVelocity.magnitude;
             var direction = Vector3.Reflect(_lastVelocity.normalized, other.contacts[0].normal);
             _rigidbody2D.velocity = direction * Mathf.Max(speed,0f);
+        }
+        else if (other.gameObject.CompareTag(Tags.LeftDeathZone.ToString()))
+        {
+            CustomEventSystem.current.onScoreChange.Invoke(0,1);
+            SetRandomPlace();
+            SetRandomVelocity();
+        }
+        else if (other.gameObject.CompareTag(Tags.RightDeathZone.ToString()))
+        {
+            CustomEventSystem.current.onScoreChange.Invoke(1,0);
+            SetRandomPlace();
+            SetRandomVelocity();
         }
     }
     

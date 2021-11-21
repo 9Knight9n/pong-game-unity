@@ -18,9 +18,9 @@ public class PaddleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && config.direction*transform.position[1]<4)
             transform.Translate(_direction * Time.deltaTime * config.direction);
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && config.direction*transform.position[1]>-4)
             transform.Translate(-_direction * Time.deltaTime * config.direction);
     }
 }

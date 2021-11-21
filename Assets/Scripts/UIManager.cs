@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text rightScore;
     [SerializeField] Text endGame;
 
+    [SerializeField] private int maxScore;
+
     private int _leftScore;
     private int _rightScore;
     // [SerializeField] EventSystemCustom eventSystemCustom;
@@ -18,7 +20,6 @@ public class UIManager : MonoBehaviour
     {
         _leftScore = 0;
         _rightScore = 0;
-        CustomEventSystem.current.onEndGame.AddListener(UpdateEndGame);
         CustomEventSystem.current.onScoreChange.AddListener(UpdateScore);
         UpdateScore(0,0);
 
@@ -29,9 +30,12 @@ public class UIManager : MonoBehaviour
         _rightScore += rightScoreChange;
         leftScore.text = _leftScore.ToString();
         rightScore.text = _rightScore.ToString();
+        if (_leftScore >= maxScore || _rightScore >= maxScore)
+            UpdateEndGame();
     }
     private void UpdateEndGame()
     {
         endGame.text = _leftScore > _rightScore ? "Red Won!" : "Green Won";
+        Time.timeScale = 0;
     }
 }

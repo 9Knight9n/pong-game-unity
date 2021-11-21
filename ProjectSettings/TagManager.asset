@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Paddle
+  - LeftDeathZone
+  - RightDeathZone
   layers:
   - Default
   - TransparentFX

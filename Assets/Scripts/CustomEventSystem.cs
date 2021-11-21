@@ -11,12 +11,10 @@ public class CustomEventSystem : MonoBehaviour
 {
     public static CustomEventSystem current;
     public MyIntEvent onScoreChange;
-    public UnityEvent onEndGame;
 
     void Awake()
     {
         current = this;
         onScoreChange = new MyIntEvent();
-        onEndGame = new UnityEvent();
     }
 }
