@@ -20,15 +20,18 @@ public class UIManager : MonoBehaviour
         _rightScore = 0;
         CustomEventSystem.current.onEndGame.AddListener(UpdateEndGame);
         CustomEventSystem.current.onScoreChange.AddListener(UpdateScore);
-        UpdateScore(0);
+        UpdateScore(0,0);
 
     }
-    private void UpdateScore(int addedScore)
+    private void UpdateScore(int leftScoreChange,int rightScoreChange)
     {
-
+        _leftScore += leftScoreChange;
+        _rightScore += rightScoreChange;
+        leftScore.text = _leftScore.ToString();
+        rightScore.text = _rightScore.ToString();
     }
     private void UpdateEndGame()
     {
-        endGame.text = "You lose!\nYour Score is ";
+        endGame.text = _leftScore > _rightScore ? "Red Won!" : "Green Won";
     }
 }
